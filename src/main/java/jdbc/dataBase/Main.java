@@ -12,6 +12,8 @@ public class Main {
     static SelectDatabase dataBase;
     static Connection conn2;
     static java.sql.Statement stmt;
+    static String dni, concepto;
+    static int cantidad;
 
     public static void main(String[] args) throws SQLException {
             //Seleccionamos la BBDD
@@ -42,7 +44,6 @@ public class Main {
     }
 
     public static void crearCliente() {
-        String dni;
         Cliente cliente = new Cliente();
         System.out.println("------ Creación de cliente ------");
         do {
@@ -86,20 +87,19 @@ public class Main {
 
 
     public static void consultarSaldo() {
-        String dni;
         System.out.println("Introduzca el DNI del titular de la cuenta");
         dni = scanner.next();
         new SelectQuery(conn2,stmt,dni);
     }
 
     public static void operarEfectivo(boolean accion) {
-        String dni;
-        int cantidad;
         System.out.println("Introduzca el DNI del titular de la cuenta");
         dni = scanner.next();
-        System.out.println("Introduzca la cantidad a retirar");
+        System.out.println("Introduzca la cantidad");
         cantidad = scanner.nextInt();
-        new UpdateData(conn2, stmt, dni, cantidad,accion);
+        System.out.println("Introduzca concepto");
+        concepto = scanner.next();
+        new UpdateData(conn2, stmt, dni, cantidad, accion, concepto);
     }
 
     public static void listarTransacciones() {
