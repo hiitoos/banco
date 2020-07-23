@@ -14,13 +14,13 @@ public class Main {
     static java.sql.Statement stmt;
 
     public static void main(String[] args) throws SQLException {
-        //Seleccionamos la BBDD
+            //Seleccionamos la BBDD
         dataBase = new SelectDatabase();
-        //Creamos la conexión y el statement para elegir si queremos SELECTs or UPDATEs
+            //Creamos la conexión y el statement para elegir si queremos SELECTs or UPDATEs
         conn2 = dataBase.getConnection();
         stmt = conn2.createStatement();
         muestraMenu();
-        //Cerramos statement y conexión
+            //Cerramos statement y conexión
         stmt.close();
         conn2.close();
     }
@@ -32,8 +32,8 @@ public class Main {
             switch (choice) {
                 case 1 -> crearCliente();
                 case 2 -> consultarSaldo();
-                case 3 -> retirarEfectivo();
-                case 4 -> ingresarEfectivo();
+                case 3 -> operarEfectivo(false);
+                case 4 -> operarEfectivo(true);
                 case 5 -> listarTransacciones();
                 case 0 -> System.exit(1);
                 default -> System.out.println("Opción incorrecta");
@@ -92,18 +92,14 @@ public class Main {
         new SelectQuery(conn2,stmt,dni);
     }
 
-    public static void retirarEfectivo() {
+    public static void operarEfectivo(boolean accion) {
         String dni;
         int cantidad;
         System.out.println("Introduzca el DNI del titular de la cuenta");
         dni = scanner.next();
         System.out.println("Introduzca la cantidad a retirar");
         cantidad = scanner.nextInt();
-        new UpdateData(conn2,stmt,dni,cantidad,false);
-    }
-
-    public static void ingresarEfectivo() {
-
+        new UpdateData(conn2, stmt, dni, cantidad,accion);
     }
 
     public static void listarTransacciones() {
