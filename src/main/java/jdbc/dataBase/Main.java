@@ -75,13 +75,7 @@ public class Main {
             int index = Integer.parseInt(matcher.group(1));
             index = index % 23;
             String reference = letras.substring(index, index + 1);
-            if (reference.equalsIgnoreCase(letra)) {
-                correcto = true;
-            } else {
-                correcto = false;
-            }
-        } else {
-            correcto = false;
+            correcto = reference.equalsIgnoreCase(letra);
         }
         return correcto;
     }
