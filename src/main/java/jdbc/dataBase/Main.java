@@ -3,6 +3,8 @@ package jdbc.dataBase;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
@@ -27,42 +29,74 @@ public class Main {
         do {
             System.out.println("Selecciona una opción:\n1.- Crear cliente\n2.- Consultar saldo\n3.- Retirar efectivo\n4.- Ingresar efectivo\n5.- Listar transacciones\n0.- Salir");
             choice = scanner.nextInt();
-            switch (choice){
-                case 1-> crearCliente();
-                case 2-> consultarSaldo();
-                case 3-> retirarEfectivo();
-                case 4-> ingresarEfectivo();
-                case 5-> listarTransacciones();
-                case 0-> System.exit(1);
-                default-> System.out.println("Opción incorrecta");
+            switch (choice) {
+                case 1 -> crearCliente();
+                case 2 -> consultarSaldo();
+                case 3 -> retirarEfectivo();
+                case 4 -> ingresarEfectivo();
+                case 5 -> listarTransacciones();
+                case 0 -> System.exit(1);
+                default -> System.out.println("Opción incorrecta");
             }
-        }while (choice!=0);
+        } while (choice != 0);
     }
 
-    public static void crearCliente(){
+    public static void crearCliente() {
+        String dni;
         Cliente cliente = new Cliente();
         System.out.println("------ Creación de cliente ------");
+        do {
+            System.out.println("Introduzca el DNI");
+            dni = scanner.next();
+            if (validarDni(dni))
+                cliente.setDni(dni);
+            else
+                System.out.println("DNI no válido");
+        }while (!validarDni(dni));
+
         System.out.println("Introduzca el nombre");
-        cliente.setNombre(scanner.nextLine());
-        System.out.println("Introduzca el nombre");
-        cliente.setNombre(scanner.nextLine());
-        System.out.println("Introduzca el nombre");
-        cliente.setNombre(scanner.nextLine());
+        cliente.setNombre(scanner.next());
+        System.out.println("Introduzca el primer apellido");
+        cliente.setApellido1(scanner.next());
+        System.out.println("Introduzca el segundo apellido");
+        cliente.setApellido2(scanner.next());
     }
 
-    public static void consultarSaldo(){
+    public static boolean validarDni(String nif) {
+        boolean correcto = false;
+        Pattern pattern = Pattern.compile("(\\d{1,8})([TRWAGMYFPDXBNJZSQVHLCKEtrwagmyfpdxbnjzsqvhlcke])");
+        Matcher matcher = pattern.matcher(nif);
+        if (matcher.matches()) {
+            String letra = matcher.group(2);
+            String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+            int index = Integer.parseInt(matcher.group(1));
+            index = index % 23;
+            String reference = letras.substring(index, index + 1);
+            if (reference.equalsIgnoreCase(letra)) {
+                correcto = true;
+            } else {
+                correcto = false;
+            }
+        } else {
+            correcto = false;
+        }
+        return correcto;
+    }
+
+
+    public static void consultarSaldo() {
 
     }
 
-    public static void retirarEfectivo(){
+    public static void retirarEfectivo() {
 
     }
 
-    public static void ingresarEfectivo(){
+    public static void ingresarEfectivo() {
 
     }
 
-    public static void listarTransacciones(){
+    public static void listarTransacciones() {
 
     }
 }
