@@ -1,0 +1,31 @@
+-- Crea el esquema
+CREATE SCHEMA `banco` DEFAULT CHARACTER SET latin1 COLLATE latin1_spanish_ci;
+
+-- Crea tabla clientes
+CREATE TABLE `banco`.`clientes` (
+  `idCliente` INT NOT NULL AUTO_INCREMENT,
+  `dni` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(45) NULL,
+  `apellido1` VARCHAR(45) NULL,
+  `apellido2` VARCHAR(45) NULL,
+  PRIMARY KEY (`idCliente`));
+
+-- Create tabla cuentas
+CREATE TABLE `banco`.`cuentas` (
+  `idCuenta` INT NOT NULL AUTO_INCREMENT,
+  `idCliente` VARCHAR(45) NULL,
+  `saldo` INT NULL,
+  `fecha` DATETIME NOT NULL,
+  PRIMARY KEY (`idCuenta`));
+
+-- Alter tabla para tener id_client FK en cuentas
+ALTER TABLE `banco`.`cuentas`
+CHANGE COLUMN `idCliente` `idCliente` INT NULL DEFAULT NULL ,
+ADD INDEX `fk_cliente_idx` (`idCliente` ASC) VISIBLE;
+
+ALTER TABLE `banco`.`cuentas`
+ADD CONSTRAINT `fk_cliente`
+  FOREIGN KEY (`idCliente`)
+  REFERENCES `banco`.`clientes` (`idCliente`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
