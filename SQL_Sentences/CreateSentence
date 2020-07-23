@@ -18,6 +18,21 @@ CREATE TABLE `banco`.`cuentas` (
   `fecha` DATETIME NOT NULL,
   PRIMARY KEY (`idCuenta`));
 
+-- Create tabla transacciones
+
+CREATE TABLE `transacciones` (
+  `idTransacciones` int NOT NULL AUTO_INCREMENT,
+  `saldo` float DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `concepto` varchar(45) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `accion` tinyint DEFAULT NULL,
+  `idCliente` int NOT NULL,
+  PRIMARY KEY (`idTransacciones`),
+  KEY `fk_transacciones_clientes1_idx` (`idCliente`),
+  CONSTRAINT `fk_transacciones_clientes1` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+
 -- Alter tabla para tener id_client FK en cuentas
 ALTER TABLE `banco`.`cuentas`
 CHANGE COLUMN `idCliente` `idCliente` INT NULL DEFAULT NULL ,

@@ -16,12 +16,12 @@ public class SelectDatabase {
 
         try {
             this.connection = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/rdbms",
+                    "jdbc:mysql://127.0.0.1:3306/banco",
                     "root",
                     "secret1234"
             );
             boolean valid = connection.isValid(50000);
-            System.out.println(valid ? "Test OK" : "Test FAIL");
+            if (valid) System.out.println("Conectado a la BBDD correctamente");
         } catch (SQLException exception) {
             System.out.println("Error: " + exception);
         }
