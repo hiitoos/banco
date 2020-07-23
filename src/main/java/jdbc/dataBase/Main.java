@@ -12,7 +12,8 @@ public class Main {
     static SelectDatabase dataBase;
     static Connection conn2;
     static java.sql.Statement stmt;
-    static String dni, concepto;
+    static String dni;
+    static String concepto;
     static int cantidad;
 
     public static void main(String[] args) throws SQLException {
@@ -103,6 +104,8 @@ public class Main {
     }
 
     public static void listarTransacciones() {
-
+        System.out.println("Introduzca el DNI del titular de la cuenta");
+        dni = scanner.next();
+        new SelectQuery(conn2, stmt, dni, "a");
     }
 }
