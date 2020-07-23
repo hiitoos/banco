@@ -88,7 +88,10 @@ public class Main {
 
 
     public static void consultarSaldo() {
-
+        String dni;
+        System.out.println("Introduzca el DNI del titular de la cuenta");
+        dni = scanner.next();
+        new SelectQuery(conn2,stmt,dni);
     }
 
     public static void retirarEfectivo() {
