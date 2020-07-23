@@ -9,14 +9,16 @@ import java.util.regex.Pattern;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     static int choice = 0;
-
+    static SelectDatabase dataBase;
+    static Connection conn2;
+    static java.sql.Statement stmt;
 
     public static void main(String[] args) throws SQLException {
         //Seleccionamos la BBDD
-        SelectDatabase dataBase = new SelectDatabase();
+        dataBase = new SelectDatabase();
         //Creamos la conexión y el statement para elegir si queremos SELECTs or UPDATEs
-        Connection conn2 = dataBase.getConnection();
-        java.sql.Statement stmt = conn2.createStatement();
+        conn2 = dataBase.getConnection();
+        stmt = conn2.createStatement();
 
         muestraMenu();
 
@@ -60,6 +62,7 @@ public class Main {
         cliente.setApellido1(scanner.next());
         System.out.println("Introduzca el segundo apellido");
         cliente.setApellido2(scanner.next());
+        new InsertData(conn2, stmt, cliente);
     }
 
     public static boolean validarDni(String nif) {
