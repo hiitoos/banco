@@ -19,9 +19,7 @@ public class Main {
         //Creamos la conexión y el statement para elegir si queremos SELECTs or UPDATEs
         conn2 = dataBase.getConnection();
         stmt = conn2.createStatement();
-
         muestraMenu();
-
         //Cerramos statement y conexión
         stmt.close();
         conn2.close();
@@ -95,7 +93,13 @@ public class Main {
     }
 
     public static void retirarEfectivo() {
-
+        String dni;
+        int cantidad;
+        System.out.println("Introduzca el DNI del titular de la cuenta");
+        dni = scanner.next();
+        System.out.println("Introduzca la cantidad a retirar");
+        cantidad = scanner.nextInt();
+        new UpdateData(conn2,stmt,dni,cantidad,false);
     }
 
     public static void ingresarEfectivo() {
