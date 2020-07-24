@@ -46,11 +46,12 @@ public class Main {
     }
 
     public static void crearCliente() {
+        Scanner scan = new Scanner(System.in);
         Cliente cliente = new Cliente();
         System.out.println("------ Creación de cliente ------");
         do {
             System.out.println("Introduzca el DNI");
-            dni = scanner.next();
+            dni = scan.nextLine();
             if (validarDni(dni))
                 cliente.setDni(dni);
             else
@@ -58,11 +59,11 @@ public class Main {
         }while (!validarDni(dni));
 
         System.out.println("Introduzca el nombre");
-        cliente.setNombre(scanner.next());
+        cliente.setNombre(scan.nextLine());
         System.out.println("Introduzca el primer apellido");
-        cliente.setApellido1(scanner.next());
+        cliente.setApellido1(scan.nextLine());
         System.out.println("Introduzca el segundo apellido");
-        cliente.setApellido2(scanner.next());
+        cliente.setApellido2(scan.nextLine());
         new InsertData(conn2, stmt, cliente);
     }
 
@@ -81,7 +82,6 @@ public class Main {
         return correcto;
     }
 
-
     public static void consultarSaldo() {
         System.out.println("Introduzca el DNI del titular de la cuenta");
         dni = scanner.next();
@@ -89,15 +89,16 @@ public class Main {
     }
 
     public static void operarEfectivo(boolean accion) {
+        Scanner lect = new Scanner(System.in);
         System.out.println("Introduzca el DNI del titular de la cuenta");
-        dni = scanner.next();
-        System.out.println("Introduzca la cantidad");
-        cantidad = scanner.nextInt();
+        dni = lect.nextLine();
         System.out.println("Introduzca concepto");
-        concepto = scanner.next();
+        concepto = lect.nextLine();
+        System.out.println("Introduzca la cantidad");
+        cantidad = lect.nextInt();
         System.out.println("Escoja cuenta");
         new SelectQuery(conn2, stmt, dni, "cuentas");
-        cuenta = scanner.nextInt();
+        cuenta = lect.nextInt();
         new UpdateData(conn2, stmt, dni, cantidad, accion, concepto, cuenta);
     }
 
