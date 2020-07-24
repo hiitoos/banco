@@ -20,7 +20,7 @@ public class UpdateData {
                 //Sentencia SQL comun para ambos casos
             SQL = SQL + cantidad + ") where cl.dni = '" + dni + "' and cu.idCuenta=" + cuenta;
             stmt.executeUpdate(SQL);
-            new SelectQuery(conn, stmt, dni);
+            new SelectQuery(conn, stmt, dni, "cliente");
             new InsertData(conn, stmt, dni, concepto, accion, cantidad, cuenta);
 
         } catch (SQLException exception) {
