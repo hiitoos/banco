@@ -1,13 +1,13 @@
 package jdbc.dataBase;
 
 public class Cliente {
-    int id;
+    static int id;
     String dni;
     String nombre;
     String apellido1;
     String apellido2;
 
-    public int getId() {
+    public static int getId() {
         return id;
     }
 

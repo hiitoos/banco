@@ -14,6 +14,8 @@ public class InsertData {
                     cliente.getApellido2()+"')";
             stmt.executeUpdate(SQL);
 
+            String SQL2 = "INSERT INTO cuentas (idCliente, saldo) VALUES ((SELECT idCliente from clientes where dni='" + cliente.getDni() + "'), 0)";
+            stmt.executeUpdate(SQL2);
 
         } catch (SQLException exception) {
             System.out.println("Error al rollback and save point" + exception);
