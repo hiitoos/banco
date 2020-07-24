@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UpdateData {
-    public UpdateData(Connection conn, Statement stmt, String dni, int cantidad, boolean accion, String concepto){
+    public UpdateData(Connection conn, Statement stmt, String dni, int cantidad, boolean accion, String concepto, int cuenta){
         try {
             String SQL;
                 //Sentencia SQL comun para ambos casos
@@ -18,16 +18,13 @@ public class UpdateData {
                 SQL+="-";
 
                 //Sentencia SQL comun para ambos casos
-            SQL = SQL + cantidad + ") where cl.dni = '" + dni + "'";
+            SQL = SQL + cantidad + ") where cl.dni = '" + dni + "' and cu.idCuenta=" + cuenta;
             stmt.executeUpdate(SQL);
             new SelectQuery(conn, stmt, dni);
-            //if (!accion && concepto.equals(""))
-            //    new InsertData(conn, stmt, dni, "Retiro de efectivo", accion, cantidad);
-            //else
-                new InsertData(conn, stmt, dni, concepto, accion, cantidad);
+            new InsertData(conn, stmt, dni, concepto, accion, cantidad, cuenta);
 
         } catch (SQLException exception) {
-            System.out.println("Error al rollback and save point" + exception);
+            System.out.println("Error al rollback and save point UPDATE DATA" + exception);
         }
     }
 }

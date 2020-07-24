@@ -12,7 +12,7 @@ public class SelectQuery {
                 int idCliente = rs.getInt("idCliente");
                 String nombre = rs.getString("nombre");
                 int saldo = rs.getInt("saldo");
-                System.out.println("Cliente: " + nombre + ", Saldo: " + saldo + "€");
+                System.out.println("Cliente: " + nombre + ", Saldo: " + saldo + "€, Nº Cuenta: " + idCuenta);
             }
 
         } catch (SQLException exception) {
@@ -40,7 +40,7 @@ public class SelectQuery {
             }
 
         } catch (SQLException exception) {
-            System.out.println("Error al rollback and save point" + exception);
+            System.out.println("Error al rollback and save point SELECTDATA" + exception);
         }
         System.out.println("");
     }

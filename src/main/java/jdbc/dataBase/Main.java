@@ -15,6 +15,7 @@ public class Main {
     static String dni;
     static String concepto;
     static int cantidad;
+    static int cuenta;
 
     public static void main(String[] args) throws SQLException {
             //Seleccionamos la BBDD
@@ -94,7 +95,9 @@ public class Main {
         cantidad = scanner.nextInt();
         System.out.println("Introduzca concepto");
         concepto = scanner.next();
-        new UpdateData(conn2, stmt, dni, cantidad, accion, concepto);
+        System.out.println("Escoja cuenta");
+        cuenta = scanner.nextInt();
+        new UpdateData(conn2, stmt, dni, cantidad, accion, concepto, cuenta);
     }
 
     public static void listarTransacciones() {
