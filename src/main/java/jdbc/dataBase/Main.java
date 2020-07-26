@@ -85,7 +85,7 @@ public class Main {
     public static void consultarSaldo() {
         System.out.println("Introduzca el DNI del titular de la cuenta");
         dni = scanner.next();
-        new SelectQuery(conn2,stmt,dni, "cliente");
+        new SelectQuery(stmt,dni, "cliente");
     }
 
     public static void operarEfectivo(boolean accion) {
@@ -97,7 +97,7 @@ public class Main {
         System.out.println("Introduzca la cantidad");
         cantidad = lect.nextInt();
         System.out.println("Escoja cuenta");
-        new SelectQuery(conn2, stmt, dni, "cuentas");
+        new SelectQuery(stmt, dni, "cuentas");
         cuenta = lect.nextInt();
         new UpdateData(conn2, stmt, dni, cantidad, accion, concepto, cuenta);
     }
@@ -105,6 +105,6 @@ public class Main {
     public static void listarTransacciones() {
         System.out.println("Introduzca el DNI del titular de la cuenta");
         dni = scanner.next();
-        new SelectQuery(conn2, stmt, dni, "transaccion");
+        new SelectQuery(stmt, dni, "transaccion");
     }
 }

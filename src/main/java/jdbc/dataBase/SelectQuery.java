@@ -3,7 +3,7 @@ package jdbc.dataBase;
 import java.sql.*;
 
 public class SelectQuery {
-    public SelectQuery(Connection conn, Statement stmt, String dni, String var){
+    public SelectQuery(Statement stmt, String dni, String var){
         try {
             if (var.equals("cliente")) {
                 String SQL = "SELECT clientes.*, cuentas.* FROM cuentas left join clientes on (clientes.idCliente = cuentas.idCliente) WHERE clientes.dni='" + dni + "';";
@@ -48,8 +48,8 @@ public class SelectQuery {
                 }
             }
             System.out.println("");
-        } catch (SQLException exception) {
-            System.out.println("Error al rollback and save point" + exception);
-        }
+            } catch (SQLException exception) {
+                System.out.println("Error al rollback and save point" + exception);
+            }
     }
 }
